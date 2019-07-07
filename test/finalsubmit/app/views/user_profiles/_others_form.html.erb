@@ -1,0 +1,122 @@
+<%= bootstrap_form_with(model: user_profile, local: true) do |form| %>
+  <%if user_profile.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user_profile.errors.count, "error") %> prohibited this user_profile from being saved:</h2>
+
+      <ul>
+        <% user_profile.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="container_fluid">
+    <div class="row" >
+      <div class="col-sm-4">
+      </div>
+      <div class="col-sm-4">
+        <div class="shadow-lg p-3 mb-5 bg-black rounded">
+          <div class="card ">
+            <div class="card-header bg-info text-white text-center"><h2>Others</h2></div>
+            <div class="text-center"  >
+              <img id="previewHolder" src="/download.png" class="rounded-circle" alt="Uploaded Image Preview Holder" width="200px" height="200px" /> </div>
+            <div class="card-body"> <div class="field" >
+              <div class="field">
+
+                <h5><%= form.text_field :name,label: "Name"  ,:required=>true, class:"label" ,pattern:"[A-Za-z]{25}"%></h5>
+              </div>
+
+              <div class="field">
+
+                <h5><%= form.text_field :unique_id,label: "Aadhaar Card" ,:required=>true , class:"label" %></h5>
+              </div>
+
+              <div class="dropdown">
+
+                <h5><%= form.select :gender, Pstaff::GENDER,:required=> true,label: "Gender" %></h5>
+              </div>
+
+              <div class="field">
+
+                <h5><%= form.text_field :mobile_no,label:"Mobile No",:required=>true, class:"label" ,pattern:"[0-9]{10}"%></h5>
+              </div>
+
+              <div class="dropdown">
+
+                <h5><%= form.select :department, Pstaff::TEMP ,:required=>true,label: "Section", class:"label" %></h5>
+              </div>
+
+              <div class="field">
+
+                <h5><%= form.text_field :applicant_type,:required=>true,label: "Applicant Type", :readonly=> true, class:"label" %></h5>
+              </div>
+
+              <div class="field">
+
+                <h5><%= form.text_field :address, label: "Address",:required=>true,class:"label"%></h5>
+              </div>
+              <div class="file">
+
+                <h5><%= form.file_field :photo ,:required=>true , label: "Upload Photo",class:"label,ui pink button", :onchange=>"readURL(this)" %></h5>
+              </div>
+
+
+              <div class="file">
+
+                <div class="label"><h5>Id Proof</h5></div>
+
+
+                <h5 style="display: none;"><%= form.file_field :id_proof ,:required=>true , class:"label,ui pink button"%></h5>
+                <div> <input type="button" value="Browse..." onclick="document.getElementById('user_profile_id_proof').click();" style="height:40px;width:60px" /></div>
+                <h6><div id="doc_name"></div></h6>
+              </div>
+              <br>
+
+              <!--   <input type="file" name="filePhoto" value="" id="filePhoto"
+                class="required borrowerImageFile" data-errormsg="PhotoUploadErrorMsg"> -->
+
+
+
+              <div class="actions">
+                <h5><%= form.submit "submit",class:"btn btn-primary" %></h5>
+              </div>
+
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<% end %>
+<script type="text/javascript">
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#previewHolder').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+
+        }
+    }
+
+    // $("#filePhoto").change(function() {
+    // readURL(this);
+    // });
+    document.getElementById('user_profile_id_proof').onchange = function () {
+        // alert('Selected file: ' + this.value);
+        var a = this.value;
+
+        doc_name = document.getElementById('doc_name');
+        // alert(doc_name);
+        // Document.getElementById("doc_name").innerHTML = "xxxxxxxxxxxxxxxxxxxxxxxxx";
+        doc_name.textContent = this.files[0].name;
+
+    };
+
+</script>

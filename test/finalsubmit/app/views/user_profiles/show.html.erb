@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @user_profile.name %>
+</p>
+
+<p>
+  <strong>Unique:</strong>
+  <%= @user_profile.unique_id %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @user_profile.gender %>
+</p>
+
+<p>
+  <strong>Mobile no:</strong>
+  <%= @user_profile.mobile_no %>
+</p>
+
+<p>
+  <strong>Department:</strong>
+  <%= @user_profile.department %>
+</p>
+
+<p>
+  <strong>Applicant type:</strong>
+  <%= @user_profile.applicant_type %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @user_profile.address %>
+</p>
+
+<%= link_to 'Edit', edit_user_profile_path(@user_profile) %> |
+<%= link_to 'Back', user_profiles_path %>

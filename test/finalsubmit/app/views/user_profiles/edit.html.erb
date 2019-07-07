@@ -1,0 +1,16 @@
+<h1>Editing User Profile</h1>
+<%if @user_profile.applicant_type == "Parmanent Staff" %>
+  <%= render 'form', user_profile: @user_profile %>
+
+<% elsif  @user_profile.applicant_type == "Temporaty Staff"%>
+  <%= render 'temporary_form', user_profile: @user_profile %>
+  <%elsif @user_profile.applicant_type == "STudent" %>
+  <%= render 'scholars_form', user_profile: @user_profile %>
+  <%else %>
+  <%= render 'others_form', user_profile: @user_profile %>
+  <%end %>
+
+
+
+<%= link_to 'Show', @user_profile %> |
+<%= link_to 'Back', user_profiles_path %>

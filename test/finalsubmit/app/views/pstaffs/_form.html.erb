@@ -1,0 +1,121 @@
+
+<%= bootstrap_form_with(model: pstaff, local: true) do |form| %>
+  <% if pstaff.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(pstaff.errors.count, "error") %> prohibited this pstaff from being saved:</h2>
+
+      <ul>
+      <% pstaff.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+ <div class="container_fluid">
+      <div class="row" >
+        <div class="col-sm-4">
+        </div>
+        <div class="col-sm-4">
+          <div class="shadow-lg p-3 mb-5 bg-black rounded">
+            <div class="card ">
+              <div class="card-header bg-info text-white text-center"><h2>Vehicle Details</h2></div>
+              <div class="card-body">
+
+  <div class="field">
+    <h5><%= form.text_field :vichel_no, label: "Vehicle Number",:required=>true, class:"label" %></h5>
+  </div>
+
+   
+ <div class="field">
+  <h5>
+    <%= form.select :vehical_type, Pstaff::VEHICAL ,:required=>true ,label: "Vehicle Type", class:"label" %>
+  </h5>
+  </div>
+   
+   <div class="field">
+  <h5><%= form.text_field :vichel_model,label: "Vehicle Model",:required=> true, class:"label"%></h5>
+  </div>
+   <div class="field">
+   <h5><%= form.text_field :RC_holder_name ,label:"RC Holder Name"  ,:required=> true, class:"label"%></h5>
+   <h5><%= form.text_field :relationship ,label: "Relationship With RC holder",:required=> true, class:"label" %></h5>
+   </div>
+
+                <div class="file">
+                  <div class="label"><h5>Registration Certificate / </h5></div>
+                  <h5 style="display: none;"><%= form.file_field :registration_certificate ,:required=>true , class:"label,ui pink button"%></h5>
+                  <div> <input type="button" value="Browse..." onclick="document.getElementById('pstaff_registration_certificate').click();" style="height:40px;width:60px" /></div>
+                  <h6><div id="doc_name"></div></h6>
+                </div>
+
+
+
+
+                <%if @user_profile.applicant_type == "Student" %>
+                  <p>><b><i>Room agreement(for day scholar)/Medical certificate(for hostler)</i> </b></p>
+                  <div class="file">
+                    <div class="label"><h5>Medical Certificate / </h5></div>
+                    <h5 style="display: none;"><%= form.file_field :document ,:required=>true , class:"label,ui pink button"%></h5>
+                    <div> <input type="button" value="Browse..." onclick="document.getElementById('pstaff_document').click();" style="height:40px;width:60px" /></div>
+                    <h6><div id="doc_name1"></div></h6>
+                  </div>
+                <%end %>
+
+
+
+
+  <div class="actions">
+    <%= form.submit "Submit", class:"btn btn-primary" %>
+    
+  </div>
+ </div>
+</div>
+</div> 
+</div>
+</div>
+</div>
+
+
+<% end %>
+
+
+
+
+<script type="text/javascript">
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#previewHolder').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+
+        }
+    }
+
+
+    document.getElementById('pstaff_registration_certificate').onchange = function () {
+        // alert('Selected file: ' + this.value);
+        var a = this.value;
+
+        doc_name = document.getElementById('doc_name');
+        // alert(doc_name);
+        // Document.getElementById("doc_name").innerHTML = "xxxxxxxxxxxxxxxxxxxxxxxxx";
+        doc_name.textContent = this.files[0].name;
+
+    };
+
+    document.getElementById('pstaff_document').onchange = function () {
+        // alert('Selected file: ' + this.value);
+        var a = this.value;
+
+        doc_name1 = document.getElementById('doc_name1');
+        // alert(doc_name);
+        // Document.getElementById("doc_name").innerHTML = "xxxxxxxxxxxxxxxxxxxxxxxxx";
+        doc_name1.textContent = this.files[0].name;
+
+    };
+
+</script>
+
